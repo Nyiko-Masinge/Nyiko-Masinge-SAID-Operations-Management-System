@@ -33,15 +33,7 @@ This is an assessment/demo account. Rotate the credentials or remove the account
 
 See [release certification](docs/RELEASE_CERTIFICATION.md), [capability audit](docs/FINAL_CAPABILITY_AUDIT.md), [deployment actions](docs/RELEASE_PIPELINE.md) and [lecturer access plan](docs/LECTURER_ACCESS.md); earlier deployment placeholders in those documents are historical. Local/emulator certification does not establish exhaustive production testing or complete academic compliance.
 
-## Team members
 
-| Team member | Student number |
-| --- | --- |
-| Nyiko Masinge | ST10434307 |
-| Ndivhuwo Ndou | ST10281928 |
-| Aaryan Makan | ST10259834 |
-| Tival Koovarjee | ST10377152 |
-| Maseo Junior Mandiwana | ST10367488 |
 
 ## Applications and architecture
 
