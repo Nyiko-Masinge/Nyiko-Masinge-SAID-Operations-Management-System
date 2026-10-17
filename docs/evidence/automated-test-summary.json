@@ -1,0 +1,210 @@
+{
+  "date": "2026-10-05",
+  "platform": "Windows local certification; remote Ubuntu CI execution pending",
+  "node": "v22.23.3",
+  "npm": "10.9.9",
+  "startingSha": "a1eef8a99bf736a609627b7e09159abd952a4944",
+  "stages": [
+    [
+      "7C",
+      "976ef3f10aa4257f8e8ae76fb94e5517c82257d5"
+    ],
+    [
+      "7D",
+      "c4e4156178dbb48d53bfe6956d452ab66c51213b"
+    ],
+    [
+      "7E",
+      "1dade37f24ae173ca4b232331fff3968f0292333"
+    ],
+    [
+      "7F",
+      "5d1cac1015e368edd9adaa9b01693c5cd9ea09e5"
+    ],
+    [
+      "7F whitespace follow-up",
+      "bee82e58b92422ef0c5f0bf043e7d99328e37d07"
+    ],
+    [
+      "7G",
+      "d7eafbdbea8471e843ced0a131b3197d2a0d265e"
+    ]
+  ],
+  "baseline": [
+    {
+      "path": "SAID Ops/web-app/package.json",
+      "unchanged": true,
+      "sha256NormalizedText": "b21b47153390b7fc21e5b20cae819490dba57d21af3a0210b5ba6dd7565a7d13"
+    },
+    {
+      "path": "SAID Ops/web-app/package-lock.json",
+      "unchanged": true,
+      "sha256NormalizedText": "91d5b01a844394506ad1c9da12b19f52ff05dfc2e6c2d5adc563b982cd179ac5"
+    },
+    {
+      "path": "SAID Ops/mobile-app/package.json",
+      "unchanged": true,
+      "sha256NormalizedText": "f71d7171eb18cb87efddc7b2bb5168249c0471ed01216a22d50ca502d7a4d79e"
+    },
+    {
+      "path": "SAID Ops/mobile-app/package-lock.json",
+      "unchanged": true,
+      "sha256NormalizedText": "308388474d1f8071e60dd21b27f98797a38f707cd2b09b9717d693d171ebb753"
+    },
+    {
+      "path": "security-tests/package.json",
+      "unchanged": true,
+      "sha256NormalizedText": "8ea17366b8b3fc9debb9b1b878a665483a02d1d5559aeb4d10680cc5b8ea03e2"
+    },
+    {
+      "path": "security-tests/package-lock.json",
+      "unchanged": true,
+      "sha256NormalizedText": "c340c7e3259ec80e29606f0c218bd81eca14b486efded24b71ed0efd2e305041"
+    },
+    {
+      "path": "security-tests/firestore.rules.test.mjs",
+      "unchanged": true,
+      "sha256NormalizedText": "52c7ee1c91fc60c95db7f2895787c8baf1d44104b9f3204d07c5eec0f847a39b"
+    },
+    {
+      "path": "security-tests/stage7a.rules.test.mjs",
+      "unchanged": true,
+      "sha256NormalizedText": "4af52033e8338be948b262332a991503bb7576443abf2a67cef9cab9fed2436a"
+    }
+  ],
+  "suites": {
+    "deterministic": {
+      "command": "node scripts/run-release-gates.cjs deterministic",
+      "tests": 383,
+      "passed": 383,
+      "failed": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "localLogSha256": "592dd6a48c272e56e8da16281bb36dd80615d0db8a58ee78bc6864480fa33e09"
+    },
+    "rules": {
+      "command": "node scripts/run-release-gates.cjs rules",
+      "tests": 235,
+      "passed": 235,
+      "failed": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "localLogSha256": "31f972e70e94c10ee0327f6e654273bd4fed6cb02aa9b3a7b17a5df43091f3e9"
+    },
+    "integration": {
+      "command": "node scripts/run-release-gates.cjs integration",
+      "tests": 75,
+      "passed": 75,
+      "failed": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "localLogSha256": "4ef01330c7f4e5bf9a18d36e51de5b4382794738250291ba71f65513a55fca59"
+    },
+    "functions-integration": {
+      "command": "node scripts/run-release-gates.cjs functions-integration",
+      "tests": 7,
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "localLogSha256": "dfef935c69efec255df94463f9752e181f0d58962b6a5f47af02de4e75279315"
+    }
+  },
+  "jest": {
+    "suites": 5,
+    "tests": 34,
+    "passed": 34
+  },
+  "countableTotal": 734,
+  "assertionProbes": {
+    "WS1": "passed",
+    "WS2": "passed: roster-final incl milestones3/4/hardening/print/critical",
+    "WS3": "passed",
+    "WS4": "passed"
+  },
+  "cleanInstalls": [
+    {
+      "workspace": "web-app",
+      "status": "passed",
+      "localLogSha256": "e6f77926b47b6fa2e72f4465c65bf2aa0cca5b1490281a2e84e5d4876f108a24"
+    },
+    {
+      "workspace": "mobile-app",
+      "status": "passed",
+      "localLogSha256": "74460ca80fe6f635d345684f24b40bdf0652c9bb13607f0380bd67db717cc59c"
+    },
+    {
+      "workspace": "security-tests",
+      "status": "passed",
+      "localLogSha256": "b4da372e331be39db0bf61cc8ca02e3555c287a9626c252af37fdf4a52237b51"
+    },
+    {
+      "workspace": "functions",
+      "status": "passed",
+      "localLogSha256": "97e9523b96335d7e1c06922062d3c19ec3aa6865aa5ca3a90a0df7fc6485e9e3"
+    }
+  ],
+  "staticChecks": [
+    {
+      "check": "lint",
+      "status": "passed",
+      "localLogSha256": "d8f22448dda1911c44fe353fcf741ea91884ff7a11c6bacdde31b67eda6c96c8"
+    },
+    {
+      "check": "build",
+      "status": "passed",
+      "localLogSha256": "923002d3bd5eeffe06920fbaf4572fdc97af0387939a4c748a448dca14fa7a43"
+    },
+    {
+      "check": "mobile-typecheck",
+      "status": "passed",
+      "localLogSha256": "2f1fa147cdf09eb1b0465c13a9459223b5ab0db74d54a43fa487a55a8ce91537"
+    },
+    {
+      "check": "expo",
+      "status": "passed",
+      "localLogSha256": "e65814bed5a8214292ef827f766e689abed2c2d67a8a895f93c6b780d932306a"
+    },
+    {
+      "check": "actionlint1.7.12, repository hygiene and git diff whitespace",
+      "status": "passed"
+    }
+  ],
+  "audit": {
+    "web-app": {
+      "info": 0,
+      "low": 0,
+      "moderate": 3,
+      "high": 5,
+      "critical": 0,
+      "total": 8
+    },
+    "mobile-app": {
+      "info": 0,
+      "low": 0,
+      "moderate": 10,
+      "high": 31,
+      "critical": 0,
+      "total": 41
+    },
+    "security-tests": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 5,
+      "critical": 0,
+      "total": 5
+    },
+    "functions": {
+      "info": 0,
+      "low": 0,
+      "moderate": 2,
+      "high": 0,
+      "critical": 0,
+      "total": 2
+    }
+  },
+  "actualCloudDeployment": "not performed",
+  "apk": "not built",
+  "freshPhysicalDeviceQa": "not performed"
+}

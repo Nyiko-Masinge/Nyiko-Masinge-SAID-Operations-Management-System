@@ -1,0 +1,1 @@
+import { AppShell } from '../../components/AppShell'; import { HistoryScreen } from '../../components/AlertsHistory'; export default function Page(){return <AppShell title="History & Audit Trail" subtitle="View past actions, changes and system activity"><HistoryScreen/></AppShell>}

@@ -1,0 +1,28 @@
+# Dependencies at any depth; package manifests and lockfiles remain tracked.
+node_modules/
+
+# Local environment values; examples are safe to commit.
+.env
+.env.*
+!.env.example
+
+# Firebase credentials and local emulator state
+*service-account*.json
+*firebase-adminsdk*.json
+*.jks
+*.p8
+*.p12
+*.pem
+*.key
+firebase-debug.log
+*-debug.log
+.firebase/
+
+# Repository-level OS, editor, and generated noise.
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+/.cache/
+/coverage/

@@ -1,0 +1,12 @@
+const test=require('node:test'),assert=require('node:assert/strict');
+const {loader}=require('./stage6b-test-support.cjs');
+const {publicationEvents,safeActor}=loader()('web-app/lib/server/operationalEvents.ts');
+const row=(id,uids)=>({scheduledWorkId:id,assignedUids:uids,title:'Duty',date:'2026-10-05',startTime:'08:00',endTime:'09:00',locationId:'ward',requiredStaff:1,isCritical:false});
+const actor=safeActor('admin',{employeeId:'ADMIN001',firstName:'Safe',surname:'Admin',password:'never'});
+const events=(a,b,prior='v1')=>publicationEvents('2026-10-05','v2',prior,a,b,actor);
+test('safe publishing actor excludes protected/private fields',()=>assert.deepEqual(actor,{uid:'admin',employeeId:'ADMIN001',displayName:'Safe Admin'}));
+test('first publication versus republish',()=>{assert.equal(events([],[],undefined)[0].data.type,'RosterRepublished');assert.equal(publicationEvents('2026-10-05','v1',undefined,[],[],actor)[0].data.type,'RosterPublished');assert.equal(events([],[])[0].data.previousPublicationVersion,'v1');});
+for(const [name,a,b,type]of [['added',[],[row('work',['a'])],'AssignmentAdded'],['removed',[row('work',['a'])],[],'AssignmentRemoved'],['reassigned',[row('work',['a'])],[row('work',['b'])],'AssignmentReassigned']])test(name+' derives immutable difference using work ID',()=>{const e=events(a,b)[1];assert.equal(e.data.type,type);assert.equal(e.data.scheduledWorkId,'work');assert.deepEqual(e.data.actor,actor);assert.equal(e.data.actorProvenance,'verified-supervisor');});
+test('unchanged identity sets reordered do not generate reassignment',()=>assert.equal(events([row('work',['a','b'])],[row('work',['b','a'])]).length,1));
+test('event IDs deterministic and disjoint across publications',()=>{assert.deepEqual(events([],[row('a',['a'])]),events([],[row('a',['a'])]));assert.notEqual(events([],[row('a',['a'])])[0].id,publicationEvents('2026-10-05','v3','v2',[],[],actor)[0].id);});
+test('payload excludes descriptions/team/skills and is bounded',()=>{const item={...row('a',['a']),title:'x'.repeat(1000),description:'secret',team:[{phone:'private'}]};const e=events([],[item])[1];assert.equal(e.data.after.title.length,200);assert.equal(e.data.after.description,undefined);assert.equal(e.data.after.team,undefined);});

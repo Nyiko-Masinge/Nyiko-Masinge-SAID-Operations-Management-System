@@ -1,0 +1,13 @@
+{
+  "name": "said-ops-firestore-rules-tests",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test firestore.rules.test.mjs",
+    "test:stage7a": "node --test stage7a.rules.test.mjs"
+  },
+  "devDependencies": {
+    "@firebase/rules-unit-testing": "^4.0.1",
+    "firebase": "^11.10.0"
+  }
+}

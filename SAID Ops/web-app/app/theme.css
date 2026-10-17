@@ -1,0 +1,99 @@
+/* Shared appearance preference. The existing dark rules in globals.css remain the baseline. */
+:root{color-scheme:dark}
+.theme-toggle{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:40px;padding:0 11px;border:1px solid var(--border);border-radius:7px;background:var(--soft);color:var(--text);font-size:13px;white-space:nowrap;cursor:pointer}
+.theme-toggle:hover{border-color:var(--bright);color:var(--bright)}
+.theme-toggle:focus-visible{outline:2px solid var(--bright);outline-offset:2px}
+.theme-toggle span:first-child{font-size:20px;line-height:1}
+@media(max-width:600px){.header-tools{gap:7px}.theme-toggle{width:40px;min-width:40px;padding:0}.theme-label{display:none}.notification{font-size:22px}}
+
+:root[data-theme=light]{
+  color-scheme:light;
+  --bg:#f3f6fa;--soft:#ffffff;--panel:#ffffff;--border:#c9d3df;
+  --muted:#526177;--text:#18283d;--blue:#075bc4;--bright:#0757b8;
+  --green:#087047;--orange:#9b5900;--purple:#6842a7;--red:#b42332;
+}
+:root[data-theme=light] body,:root[data-theme=light] .app-shell{background:var(--bg);color:var(--text)}
+:root[data-theme=light] .sidebar{background:#e8eff8;border-right-color:#c7d5e5}
+:root[data-theme=light] .sidebar a,:root[data-theme=light] .sidebar button{color:#1f334e}
+:root[data-theme=light] .sidebar i,:root[data-theme=light] .profile small{color:#4d617a}
+:root[data-theme=light] .sidebar a:hover,:root[data-theme=light] .sidebar a.active{background:linear-gradient(90deg,#cfdef4,#e5eef9);color:#064a9d}
+:root[data-theme=light] .side-bottom:before{background:#c2cfde}
+:root[data-theme=light] .avatar,:root[data-theme=light] .top-avatar{border-color:#8296af;color:#16395e}
+:root[data-theme=light] .workspace header{background:#fff;border-bottom-color:#c8d3e0}
+:root[data-theme=light] .workspace header p{color:#53647a}
+:root[data-theme=light] .menu-button,:root[data-theme=light] .notification{color:#334e70}
+:root[data-theme=light] .notification{border-left-color:#d3dce7}
+:root[data-theme=light] .app-footer{border-top-color:#cbd5e0;color:#506178}
+:root[data-theme=light] .app-footer span{border-left-color:#b4c2d1}
+:root[data-theme=light] .stat-card,:root[data-theme=light] .panel{background:linear-gradient(135deg,#fff,#f8fafd);border-color:var(--border);box-shadow:0 2px 8px #1d39500a}
+:root[data-theme=light] .panel-title{border-bottom-color:#d4dce5}
+:root[data-theme=light] .alert-row,:root[data-theme=light] .area,:root[data-theme=light] .quick-grid a{border-color:#d0d9e4;background:#fff}
+:root[data-theme=light] .alert-row small,:root[data-theme=light] .activity-row small{color:#526177}
+:root[data-theme=light] .alert-row i.danger{background:#fde6e8;color:#a51f30}
+:root[data-theme=light] .alert-row i.warning,:root[data-theme=light] .alert-row i.orange{background:#fff0d5;color:#985900}
+:root[data-theme=light] .alert-row i.info{background:#e0efff;color:#0757b8}
+:root[data-theme=light] .activity-row{border-bottom-color:#d9e2eb}
+:root[data-theme=light] .activity-row>.timeline:after{background:#b9c8d8}
+:root[data-theme=light] .activity-row>.timeline i{border-color:#fff}
+:root[data-theme=light] .activity-row em.inprogress{color:#8b5000;border-color:#b98335}
+:root[data-theme=light] .activity-row em.upcoming{color:#6842a7;border-color:#9f84c7}
+:root[data-theme=light] .quick-grid span,:root[data-theme=light] .mini-stat b{color:var(--text)}
+:root[data-theme=light] .area small{color:var(--green)}
+:root[data-theme=light] .area.attention small{color:var(--orange)}
+:root[data-theme=light] .week-nav button,:root[data-theme=light] .tabs button,:root[data-theme=light] .filters button,:root[data-theme=light] .pagination button{color:#334b67}
+:root[data-theme=light] .day-tabs button,:root[data-theme=light] .tabs>button,:root[data-theme=light] .detail-tabs button{color:#516177}
+:root[data-theme=light] .day-tabs button.active,:root[data-theme=light] .tabs>button.active,:root[data-theme=light] .detail-tabs button.active{color:#0757b8}
+:root[data-theme=light] .action-button{background:#fff;color:#174270;border-color:#b9c8d9}
+:root[data-theme=light] .action-button:hover,:root[data-theme=light] .action-button.primary{background:#075bc4;border-color:#075bc4;color:#fff}
+:root[data-theme=light] .action-button:disabled{background:#edf1f5;border-color:#cad3de;color:#6b7889;opacity:1}
+:root[data-theme=light] .notice{background:#e7f2ff;border-color:#96bfe9;color:#174774}
+:root[data-theme=light] .mini-stat,:root[data-theme=light] .weekly-review{background:#fff;color:var(--text)}
+:root[data-theme=light] .table-wrap{background:#fff}
+:root[data-theme=light] th{background:#e9eff6;color:#304861}
+:root[data-theme=light] td{border-top-color:#dbe3ec}
+:root[data-theme=light] td small,:root[data-theme=light] .assign-card small,:root[data-theme=light] .pool-row small{color:#596a80}
+:root[data-theme=light] tbody tr:hover,:root[data-theme=light] tbody tr.selected{background:#deecfc}
+:root[data-theme=light] .pill{background:#e1f5e9;border-color:#76b99a;color:#086744}
+:root[data-theme=light] .pill.unassigned,:root[data-theme=light] .pill.inactive,:root[data-theme=light] .pill.high,:root[data-theme=light] .pill.unavailable,:root[data-theme=light] .pill.onleave{background:#fce7e9;border-color:#dca0a7;color:#a71e2d}
+:root[data-theme=light] .pill.conflict,:root[data-theme=light] .pill.medium,:root[data-theme=light] .pill.training{background:#fff0d4;border-color:#d8b56c;color:#875000}
+:root[data-theme=light] .pill.upcoming{background:#eee8fb;border-color:#b8a4d7;color:#604096}
+:root[data-theme=light] .pill.low{background:#e2f0ff;border-color:#9ec2e9;color:#0757b8}
+:root[data-theme=light] .danger-text{color:#b42332}
+:root[data-theme=light] .icon-button{color:#315574}
+:root[data-theme=light] .assign-card{color:var(--text);border-bottom-color:#d6e0eb}
+:root[data-theme=light] .assign-card.selected{background:#deecfc}
+:root[data-theme=light] .assign-card:last-child{color:var(--bright)}
+:root[data-theme=light] .pool-row{border-bottom-color:#d9e2ec}
+:root[data-theme=light] .pool-row button:disabled{border-color:#c9d1db;color:#65758a}
+:root[data-theme=light] .search,:root[data-theme=light] .filters select,:root[data-theme=light] .filters input,:root[data-theme=light] select,:root[data-theme=light] .search-field,:root[data-theme=light] .form-grid input,:root[data-theme=light] .form-grid select,:root[data-theme=light] .picker-field .icon-button{background:#fff;color:var(--text);border-color:#b7c7d9}
+:root[data-theme=light] input::placeholder{color:#65768a}
+:root[data-theme=light] input:focus-visible,:root[data-theme=light] select:focus-visible,:root[data-theme=light] button:focus-visible,:root[data-theme=light] a:focus-visible{outline:2px solid #075bc4;outline-offset:2px}
+:root[data-theme=light] .search-field{color:#536780}
+:root[data-theme=light] .details p{color:#506177}
+:root[data-theme=light] .details dt,:root[data-theme=light] .pagination,:root[data-theme=light] .form-grid label{color:#51637a}
+:root[data-theme=light] .pagination button.active{background:#dbeafb;color:#0757b8}
+:root[data-theme=light] .modal-backdrop{background:#152b43a8}
+:root[data-theme=light] .modal{background:#fff;border-color:#9bb8d9;box-shadow:0 20px 55px #142e4a44}
+:root[data-theme=light] .close{color:#253b56}
+:root[data-theme=light] .detail-tabs{border-bottom-color:#d4deea}
+:root[data-theme=light] .workload span{background:#d6e2ec}
+:root[data-theme=light] .availability-note{color:#526781!important}
+:root[data-theme=light] .weekly-totals span{color:#4d627b}
+:root[data-theme=light] .weekly-totals b{color:var(--text)}
+:root[data-theme=light] .weekly-days button{background:#fff;color:var(--text)}
+:root[data-theme=light] .weekly-days button.active{background:#e1efff;border-color:#075bc4}
+:root[data-theme=light] .weekly-days small,:root[data-theme=light] .search-label{color:#52677f}
+:root[data-theme=light] .assignment-feedback.error{background:#fff0f1;border-color:#cf8590;color:#9b1f2b}
+:root[data-theme=light] .assignment-feedback.success{background:#e5f6eb;border-color:#83bd9a;color:#086744}
+:root[data-theme=light] .login-page{background:#eaf1f9}
+:root[data-theme=light] .login-shell{background:radial-gradient(circle at 25% 45%,#fafdff 0,#eaf2fb 65%,#e3edf8 100%);border-color:#bfcede}
+:root[data-theme=light] .intro-copy p,:root[data-theme=light] .capabilities b,:root[data-theme=light] .login-card>p,:root[data-theme=light] .check,:root[data-theme=light] .or,:root[data-theme=light] .login-footer{color:#52647b}
+:root[data-theme=light] .system-status,:root[data-theme=light] .login-card{background:#fff;color:var(--text);border-color:#9cb9d8}
+:root[data-theme=light] .system-status b{color:var(--green)}
+:root[data-theme=light] .login-card input:not([type=checkbox]){background:#fff;color:var(--text);border-color:#aabbd0}
+:root[data-theme=light] .password-wrap button{color:#53677e}
+:root[data-theme=light] .form-message{background:#e7f2ff;color:#174774!important}
+:root[data-theme=light] .form-message.error{background:#fff0f1;color:#9b1f2b!important}
+:root[data-theme=light] .or span{background:#c6d4e2}
+:root[data-theme=light] .sso{background:#fff;color:#0757b8}
+@media(max-width:1024px){:root[data-theme=light] .sidebar{box-shadow:12px 0 30px #233c5540}:root[data-theme=light] .drawer-close{background:#fff!important;color:#253b56}:root[data-theme=light] .app-shell.drawer-open .drawer-backdrop{background:#152b4380}}

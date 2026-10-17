@@ -1,0 +1,68 @@
+import type { Employee } from '../types/employees';
+
+export const demoEmployees: Employee[] = [
+  {
+    id: 'emp-sarah-j',
+    firstName: 'Sarah',
+    surname: 'Jenkins',
+    email: 'sarah.jenkins@saidops.demo',
+    phoneNumber: '071 234 5678',
+    roleId: 'lead',
+  },
+  {
+    id: 'emp-marco-r',
+    firstName: 'Marco',
+    surname: 'Rossi',
+    email: 'marco.rossi@saidops.org',
+    phoneNumber: '+27 11 234 5679',
+    roleId: 'nurse',
+  },
+  {
+    id: 'emp-lindiwe-m',
+    firstName: 'Lindiwe',
+    surname: 'Mokoena',
+    email: 'lindiwe.mokoena@saidops.org',
+    phoneNumber: '+27 11 234 5680',
+    roleId: 'nurse',
+  },
+  {
+    id: 'emp-thabo-d',
+    firstName: 'Thabo',
+    surname: 'Dlamini',
+    email: 'thabo.dlamini@saidops.org',
+    phoneNumber: '+27 11 234 5681',
+    roleId: 'orderly',
+  },
+  {
+    id: 'emp-adam-d',
+    firstName: 'Adam',
+    surname: 'Davids',
+    email: 'adam.davids@saidops.org',
+    phoneNumber: '+27 11 234 5682',
+    roleId: 'nurse',
+  },
+  {
+    id: 'emp-michelle-k',
+    firstName: 'Michelle',
+    surname: 'Khumalo',
+    email: 'michelle.khumalo@saidops.org',
+    phoneNumber: '+27 11 234 5683',
+    roleId: 'nurse',
+  },
+  {
+    id: 'emp-sipho-n',
+    firstName: 'Sipho',
+    surname: 'Nkosi',
+    email: 'sipho.nkosi@saidops.org',
+    phoneNumber: '+27 11 234 5684',
+    roleId: 'orderly',
+  },
+  {
+    id: 'emp-thandi-t',
+    firstName: 'Thandi',
+    surname: 'Tshabalala',
+    email: 'thandi.tshabalala@saidops.org',
+    phoneNumber: '+27 11 234 5685',
+    roleId: 'nurse',
+  },
+];

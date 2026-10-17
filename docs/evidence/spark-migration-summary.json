@@ -1,0 +1,243 @@
+{
+  "date": "2026-10-05",
+  "startingSha": "30dec7ab761541a1075356d9b81c02bafe9aeac0",
+  "node": "v22.23.3",
+  "npm": "10.9.9",
+  "java": "21.0.11",
+  "platform": "Windows final local release gate; final remote CI verified separately after push",
+  "architecture": "Vercel Next trusted APIs + Firebase Spark Auth/Firestore/rules/indexes + EAS",
+  "route": "POST /api/mobile/task-progress",
+  "firebaseDeployScope": [
+    "firestore:rules",
+    "firestore:indexes"
+  ],
+  "retiredFunctions": [
+    "recordTaskProgress",
+    "queueOperationalNotifications",
+    "deliverOperationalNotifications"
+  ],
+  "functionsEmulatorRequired": false,
+  "suites": {
+    "deterministic": {
+      "tests": 439,
+      "pass": 439,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "localLog": ".cache/spark-final-deterministic.log",
+      "logSha256": "bbce753ceb6f578d2f89f58410a038bb9aeb8e8d3e52486a2b8dbc23345626cb"
+    },
+    "rules": {
+      "tests": 235,
+      "pass": 235,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "localLog": ".cache/spark-final-rules.log",
+      "logSha256": "ce83394606b4801c755ef65126d701d46fed84863f88706bfba9a82d2d7ff6e2"
+    },
+    "integration": {
+      "tests": 89,
+      "pass": 89,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "localLog": ".cache/spark-final-integration.log",
+      "logSha256": "e2cb0b8c639d6d5c7e9f3634a3cb4682d86baa1f92c828310a8526a7979b2e5a"
+    },
+    "monitoring": {
+      "tests": 34,
+      "pass": 34,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0
+    }
+  },
+  "totalCountableTests": 797,
+  "probes": [
+    "WS1 location/auth",
+    "WS2 final roster (includes milestones 3/4)",
+    "WS3 mobile status safety",
+    "WS4 monitoring/safety"
+  ],
+  "checks": [
+    {
+      "name": "hygiene",
+      "result": "passed",
+      "localLog": ".cache/spark-final-hygiene.log",
+      "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "install-web",
+      "result": "passed",
+      "localLog": ".cache/spark-final-install-web.log",
+      "logSha256": "1047c08f1aa6eeaced62ccfd85b324a7a6884ff1bc91157102d73b1b8b339b06"
+    },
+    {
+      "name": "install-mobile",
+      "result": "passed",
+      "localLog": ".cache/spark-final-install-mobile.log",
+      "logSha256": "45410b8f60d0260ff4f1c0f95c021054748b77de1e36e12208b5e66a39144702"
+    },
+    {
+      "name": "install-security",
+      "result": "passed",
+      "localLog": ".cache/spark-final-install-security.log",
+      "logSha256": "3b5df56c38a7a5b7e33c9a728816d2412b68c1e239e60cc36ffd6e27da121969"
+    },
+    {
+      "name": "web-lint",
+      "result": "passed",
+      "localLog": ".cache/spark-final-web-lint.log",
+      "logSha256": "d8f22448dda1911c44fe353fcf741ea91884ff7a11c6bacdde31b67eda6c96c8"
+    },
+    {
+      "name": "web-build",
+      "result": "passed",
+      "localLog": ".cache/spark-final-web-build.log",
+      "logSha256": "992cc55ce78407feb4264c42d4c0903fd6dce8c27aa3687d3d45eec5fabf1366"
+    },
+    {
+      "name": "mobile-typecheck",
+      "result": "passed",
+      "localLog": ".cache/spark-final-mobile-typecheck.log",
+      "logSha256": "2f1fa147cdf09eb1b0465c13a9459223b5ab0db74d54a43fa487a55a8ce91537"
+    },
+    {
+      "name": "mobile-expo",
+      "result": "passed",
+      "localLog": ".cache/spark-final-mobile-expo.log",
+      "logSha256": "e65814bed5a8214292ef827f766e689abed2c2d67a8a895f93c6b780d932306a"
+    },
+    {
+      "name": "actionlint",
+      "result": "passed",
+      "localLog": ".cache/spark-final-actionlint.log",
+      "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "whitespace",
+      "result": "passed",
+      "localLog": ".cache/spark-final-whitespace.log",
+      "logSha256": "cd4255d6700827052935843a5aebcb972a2af0b41f8d49b1b1d1e053518f6b81"
+    }
+  ],
+  "baseline": [
+    {
+      "path": "SAID Ops/web-app/package.json",
+      "unchanged": true,
+      "sha256NormalizedText": "b21b47153390b7fc21e5b20cae819490dba57d21af3a0210b5ba6dd7565a7d13"
+    },
+    {
+      "path": "SAID Ops/web-app/package-lock.json",
+      "unchanged": true,
+      "sha256NormalizedText": "91d5b01a844394506ad1c9da12b19f52ff05dfc2e6c2d5adc563b982cd179ac5"
+    },
+    {
+      "path": "SAID Ops/mobile-app/package.json",
+      "unchanged": true,
+      "sha256NormalizedText": "f71d7171eb18cb87efddc7b2bb5168249c0471ed01216a22d50ca502d7a4d79e"
+    },
+    {
+      "path": "SAID Ops/mobile-app/package-lock.json",
+      "unchanged": true,
+      "sha256NormalizedText": "308388474d1f8071e60dd21b27f98797a38f707cd2b09b9717d693d171ebb753"
+    },
+    {
+      "path": "security-tests/package.json",
+      "unchanged": true,
+      "sha256NormalizedText": "8ea17366b8b3fc9debb9b1b878a665483a02d1d5559aeb4d10680cc5b8ea03e2"
+    },
+    {
+      "path": "security-tests/package-lock.json",
+      "unchanged": true,
+      "sha256NormalizedText": "c340c7e3259ec80e29606f0c218bd81eca14b486efded24b71ed0efd2e305041"
+    },
+    {
+      "path": "functions/package.json",
+      "unchanged": true,
+      "sha256NormalizedText": "c375a452bf22e0714e67f3366e65a83866b79c6e014cd8bf042b13e23197ecd8"
+    },
+    {
+      "path": "functions/package-lock.json",
+      "unchanged": true,
+      "sha256NormalizedText": "200290e8e8eaeb6462185e23c63d2b752850565446483d4bb3962b657a54850a"
+    }
+  ],
+  "changedFiles": [
+    ".github/workflows/ci.yml",
+    "README.md",
+    "SAID Ops/mobile-app/.env.example",
+    "SAID Ops/mobile-app/README.md",
+    "SAID Ops/mobile-app/lib/taskProgress.ts",
+    "SAID Ops/web-app/README.md",
+    "SAID Ops/web-app/app/api/mobile/task-progress/route.ts",
+    "SAID Ops/web-app/lib/server/admin.ts",
+    "SAID Ops/web-app/lib/server/notifications.ts",
+    "SAID Ops/web-app/lib/server/taskProgress.ts",
+    "docs/DEVELOPMENT_CONTRACT.md",
+    "docs/FINAL_CAPABILITY_AUDIT.md",
+    "docs/LECTURER_ACCESS.md",
+    "docs/PLATFORM_SETUP.md",
+    "docs/RECOVERY_PLAN.md",
+    "docs/RELEASE_CERTIFICATION.md",
+    "docs/RELEASE_PIPELINE.md",
+    "docs/SPARK_MIGRATION.md",
+    "docs/WORKSTREAM_5_INTEGRATION_CONTRACT.md",
+    "docs/evidence/spark-migration-summary.json",
+    "firebase.json",
+    "firestore.rules",
+    "functions/README.md",
+    "functions/index.cjs",
+    "scripts/check-deployment-env.cjs",
+    "scripts/roster-restoration-emulator.test.cjs",
+    "scripts/run-release-gates.cjs",
+    "scripts/spark-next-server.cjs",
+    "scripts/spark-progress-emulator.test.cjs",
+    "scripts/spark-progress.test.cjs",
+    "scripts/spark-test-support.cjs",
+    "scripts/stage6c-emulator.test.cjs",
+    "scripts/stage6c.test.cjs",
+    "scripts/stage7c-trigger-emulator.test.cjs",
+    "scripts/stage7d-emulator.test.cjs",
+    "scripts/stage7e-emulator.test.cjs",
+    "scripts/stage7f-emulator.test.cjs",
+    "security-tests/firestore.rules.test.mjs"
+  ],
+  "securityTestAccounting": "193 original cases retained; only superseded positive direct-progress-write assertions now deny. Additional 42 unchanged.",
+  "historicalTestAccounting": "Historical pure Functions/history/notification tests retained. One actual Functions-trigger emulator test retained as retired evidence; 6 notification tests migrate into Auth/Firestore integration and 8 actual Next HTTP E2E tests supersede production trigger dependence.",
+  "focused": {
+    "progressMobileWorkflow": 114,
+    "additionalCrossDeviceRegressionVerifiedInFinalGate": 1,
+    "security": 235,
+    "affectedEmulator": [
+      {
+        "suite": "stage6c",
+        "tests": 8
+      },
+      {
+        "suite": "stage7d",
+        "tests": 6
+      },
+      {
+        "suite": "stage7e",
+        "tests": 5
+      },
+      {
+        "suite": "stage7f",
+        "tests": 9
+      },
+      {
+        "suite": "actualNextHttp",
+        "tests": 8
+      }
+    ],
+    "portableActualNextHttp": 8
+  },
+  "finalGateRepairs": [
+    "Offline clean install lacked one locked cache entry; registry installation passed without dependency changes.",
+    "Restoration emulator fixture initially lacked the new API origin (2 dependent assertions failed); fixture now uses the trusted route and complete integration rerun passed."
+  ],
+  "deploymentFlagAtStart": "unset",
+  "noBillingOrDeploymentActions": true
+}

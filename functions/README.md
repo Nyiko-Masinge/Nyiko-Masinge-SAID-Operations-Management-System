@@ -1,0 +1,3 @@
+# Retired Stage 7C/7D implementation
+
+These three Cloud Functions and their tests are preserved as historical certification source. They were superseded before production by the trusted Next.js mobile progress and publication transactions in `SAID Ops/web-app/lib/server`. This directory is excluded from `firebase.json`, active production deployment, and emulator release gates. Do not deploy or run its triggers alongside the new runtime: that would duplicate history and notifications. Pure historical deterministic tests remain in the release gate; the old Functions-emulator test is retained as historical evidence.

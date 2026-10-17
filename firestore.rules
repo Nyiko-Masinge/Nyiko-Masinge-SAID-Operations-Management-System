@@ -1,0 +1,211 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function owns(uid) {
+      return signedIn() && request.auth.uid == uid;
+    }
+
+    function employeePath(uid) {
+      return /databases/$(database)/documents/employees/$(uid);
+    }
+
+    function rolePath(roleId) {
+      return /databases/$(database)/documents/roles/$(roleId);
+    }
+
+    function hasEmployee() {
+      return signedIn() && exists(employeePath(request.auth.uid));
+    }
+
+    function currentEmployee() {
+      return get(employeePath(request.auth.uid)).data;
+    }
+
+    function hasRoleReference() {
+      return hasEmployee() && currentEmployee().get('roleId', null) is string;
+    }
+
+    function validRole(data, roleId) {
+      // WS1 derives role identity from the path; a legacy stored id is optional.
+      return data.get('id', roleId) == roleId
+        && data.get('name', '') in ['Staff Member', 'Supervisor/Administrator'];
+    }
+
+    function currentRole() {
+      return hasRoleReference()
+        && exists(rolePath(currentEmployee().roleId))
+        && validRole(get(rolePath(currentEmployee().roleId)).data, currentEmployee().roleId)
+        ? get(rolePath(currentEmployee().roleId)).data.name
+        : '';
+    }
+
+    function isSupervisor() {
+      return currentRole() == 'Supervisor/Administrator';
+    }
+
+    function isStaff() {
+      return currentRole() == 'Staff Member';
+    }
+
+    function hasKnownRole() {
+      return currentRole() in ['Staff Member', 'Supervisor/Administrator'];
+    }
+
+    function changedOnly(fields) {
+      return request.resource.data.diff(resource.data).affectedKeys().hasOnly(fields);
+    }
+
+    function validEmployee(data) {
+      // Preserve trusted management/legacy fields, but never make them client-editable.
+      return data.keys().hasAll(['employeeId', 'firstName', 'surname', 'roleId'])
+        && data.employeeId is string && data.employeeId.size() > 0
+        && data.firstName is string && data.surname is string && data.roleId is string
+        && (!data.keys().hasAny(['contactEmail']) || data.contactEmail is string)
+        && (!data.keys().hasAny(['phoneNumber']) || data.phoneNumber is string)
+        && (!data.keys().hasAny(['profilePictureUrl']) || data.profilePictureUrl is string);
+    }
+
+    function validLocation(data, locationId) {
+      return data.keys().hasAll(['name'])
+        && data.keys().hasOnly(['id', 'name', 'active'])
+        && data.name is string
+        && data.get('id', locationId) == locationId
+        && (!data.keys().hasAny(['active']) || data.active is bool);
+    }
+
+    function rosterPath(weekStart) {
+      return /databases/$(database)/documents/publishedRosters/$(weekStart);
+    }
+
+    function itemPath(weekStart, version, scheduledWorkId) {
+      return /databases/$(database)/documents/publishedRosters/$(weekStart)/versions/$(version)/items/$(scheduledWorkId);
+    }
+
+    function isCurrentPublication(weekStart, version) {
+      return exists(rosterPath(weekStart))
+        && get(rosterPath(weekStart)).data.currentVersion == version;
+    }
+
+    function assignedToCurrentWork(data, scheduledWorkId) {
+      let path = itemPath(data.weekStart, data.publicationVersion, scheduledWorkId);
+      return isCurrentPublication(data.weekStart, data.publicationVersion)
+        && get(rosterPath(data.weekStart)).data.get('archived', false) != true
+        && exists(path)
+        && get(path).data.scheduledWorkId == scheduledWorkId
+        && get(path).data.weekStart == data.weekStart
+        && request.auth.uid in get(path).data.assignedUids;
+    }
+
+    function validProgress(data, scheduledWorkId) {
+      return data.keys().hasAll([
+          'scheduledWorkId', 'weekStart', 'publicationVersion', 'status', 'updatedAt'
+        ])
+        && data.keys().hasOnly([
+          'scheduledWorkId', 'weekStart', 'publicationVersion', 'status', 'updatedAt',
+          'unableToCompleteReason'
+        ])
+        && data.scheduledWorkId == scheduledWorkId
+        && data.weekStart is string && data.weekStart.size() > 0
+        && data.publicationVersion is string && data.publicationVersion.size() > 0
+        && data.status in ['In Progress', 'Completed', 'Unable to Complete']
+        && data.updatedAt is timestamp && data.updatedAt == request.time
+        && (!data.keys().hasAny(['unableToCompleteReason'])
+          || data.unableToCompleteReason is string)
+        && (data.status != 'Unable to Complete'
+          || (data.keys().hasAll(['unableToCompleteReason'])
+            && nonblankReason(data.unableToCompleteReason)));
+    }
+
+    function nonblankReason(reason) {
+      // Match WS3's JavaScript trim whitespace. Rules trim alone misses NBSP/BOM.
+      return reason.matches('(?s).*[^\\s\\x{000B}\\x{00A0}\\x{1680}\\x{2000}-\\x{200A}\\x{2028}\\x{2029}\\x{202F}\\x{205F}\\x{3000}\\x{FEFF}].*');
+    }
+
+    function validProgressTransition(before, after) {
+      return (before == 'In Progress' && after in ['Completed', 'Unable to Complete'])
+        || (before in ['Completed', 'Unable to Complete'] && after == 'In Progress');
+    }
+
+    match /employees/{uid} {
+      // Own get permits WS1 to bootstrap its profile/role resolution after Auth sign-in.
+      allow get: if owns(uid) || isSupervisor();
+      allow list: if isSupervisor();
+      allow update: if false;
+      allow create, delete: if false;
+
+      match /taskProgress/{scheduledWorkId} {
+        allow get, list: if (owns(uid) && hasKnownRole()) || isSupervisor();
+        // Live progress, history and inbox records commit through the trusted Next API.
+        allow create, update, delete: if false;
+      }
+
+      match /notifications/{notificationId} {
+        allow get, list: if owns(uid) && hasKnownRole();
+        allow update: if owns(uid) && hasKnownRole()
+          && changedOnly(['isRead'])
+          && request.resource.data.isRead is bool;
+        allow create, delete: if false;
+      }
+    }
+
+    match /roles/{roleId} {
+      // Only the referenced role is needed by the certified WS1 AuthProvider.
+      allow get: if hasRoleReference() && currentEmployee().roleId == roleId;
+      allow list, create, update, delete: if false;
+    }
+
+    match /dutyTemplates/{templateId} {
+      allow get, list: if isSupervisor();
+      // Stage 7A uses the authorized Next.js Admin boundary for all planning writes.
+      allow create, update, delete: if false;
+    }
+
+    match /operationalEvents/{eventId} {
+      allow get, list: if isSupervisor();
+      allow create, update, delete: if false;
+    }
+
+    match /locations/{locationId} {
+      // Missing active means active; retired locations also resolve historical work.
+      allow get, list: if signedIn();
+      allow create: if isSupervisor() && validLocation(request.resource.data, locationId);
+      allow update: if isSupervisor() && validLocation(request.resource.data, locationId)
+        && changedOnly(['name', 'active']);
+      allow delete: if false;
+    }
+
+    match /publishedRosters/{weekStart} {
+      allow get, list: if signedIn();
+      allow create, update, delete: if false;
+
+      match /versions/{version}/items/{scheduledWorkId} {
+        allow get, list: if isSupervisor()
+          || (isStaff() && isCurrentPublication(weekStart, version)
+            && request.auth.uid in resource.data.assignedUids);
+        // Snapshot contents, including safe team projections, are trusted publication.
+        allow create, update, delete: if false;
+      }
+    }
+
+    match /shifts/{shiftId} {
+      // Preserve the existing administrative read surface; raw shifts never store FR-9.
+      allow get, list: if isSupervisor();
+      allow create, update, delete: if false;
+    }
+
+    match /leaveRequests/{requestId} {
+      // No certified submission/approval workflow exists yet.
+      allow read, write: if false;
+    }
+
+    // Provisional alerts/auditLogs/notes/top-level notifications, archive/history,
+    // draft scheduling, and every other unapproved path remain client-denied.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,0 +1,7 @@
+.next/
+.env.local
+.next-dev/
+.next-prod/
+.vercel/
+node_modules/
+tsconfig.tsbuildinfo

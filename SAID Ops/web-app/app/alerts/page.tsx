@@ -1,0 +1,1 @@
+import { AppShell } from '../../components/AppShell'; import { AlertsScreen } from '../../components/AlertsHistory'; export default function Page(){return <AppShell title="Alerts & Exceptions" subtitle="Identify, review and resolve operational issues"><AlertsScreen/></AppShell>}
